@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>setting for the memory game </title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+
+</head>
+<body>
+    <div id="content mt-5">
+        <h1 class="text-center mt-5">change game default level or setting</h1>
+        <div class="myform w-50 m-auto text-center">
+            <form action="" method="post" id="changeoptions">
+                <label class="form-label bg-danger p-2 text-white fs-4">sleclect your default level</label>
+                <select class="form-select" aria-label="Default select example" name=level>
+                    <option selected value="8">easy</option>
+                    <option value="12">median</option>
+                    <option value="16">heigh</option> 
+                </select>
+                <input type="submit" value="save the level" class="btn btn-primary mt-4 text-center">
+        </div>
+        </form>
+    </div>
+    <script>
+        var selectedIndex=0;
+        window.onload = function(){ 
+                var cc= document.cookie.split(";")
+            for (x in cc) { 
+                if (cc[x].substr(0, 18) == " memgorygamelevel=") { 
+                console.log(cc[x].substr(18)) 
+                var val=parseInt(cc[x].substr(18));
+                if(val==8){ selectedIndex = 0; } 
+                else if (val == 12) {selectedIndex = 1;}
+                else if (val == 16) {selectedIndex = 2;}
+            } }
+            document.getElementsByName("level")[0].selectedIndex = selectedIndex;
+        }
+        var form1= document.getElementById("changeoptions");
+            form1.addEventListener("submit", function () {
+                event.preventDefault();
+                selectedIndex= document.getElementsByName("level")[0].selectedIndex ;
+                var value= document.getElementsByName("level")[0].selectedOptions[0].value;
+                //makechangeingame(value);
+                var cname= "memgorygamelevel";
+                // if(document.cookie.split(";")[0].split("=")[0] == cname){
+                //     document.cookie = cname + "=" + value;
+                // }else{
+                    var cookval = document.cookie;
+                    document.cookie = cname + "=" + value;
+                //} 
+                //document.cookie;
+                ////////////////////////////////////////////////////////////////
+            var mylevel = document.getElementsByName("level")[0].selectedOptions[0].value;
+                    
+                        chrome.storage.sync.set({"mylevel": value},function(){
+                            console.log("inside chrome.storage.sync " + parseInt(value));
+                            close(); 
+                        });
+                    
+            });
+    </script>
+    <script src="main.js"></script>
+</body>
+</html>
+
+<!-- "content_security_policy": "script-src 'self' 'unsafe-eval'; obj ect-src 'self'" -->

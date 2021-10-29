@@ -2,15 +2,18 @@
     "manifest_version" : 2,
     "name" : "Gamer",
     "version" : "1.0",
-    "description" : "Gamer Anywhere",
+    "description" : "Memory Game for js project",
     "icons" : {
         "128" : "imgs/icons128.png",
         "48" : "imgs/icons48.png",
         "16" : "imgs/icons16.png"
-    },
+    }, 
+    "permissions": ["storage"],
     "browser_action" : {
         "default_icon" : "imgs/icons16.png",
         "default_popup" : "popup.html"
-    },
-    "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'"
+    }, 
+    "options_page":"options.html"  
+    
+    
 }
